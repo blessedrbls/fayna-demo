@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fayna Gostyna | Кейтеринг та BBQ</title>
+  <meta name="description" content="Fayna Gostyna: шашлик на замовлення та виїзний BBQ-кейтеринг на весілля, корпоративи й дні народження. Телефон +38 063 395 77 09.">
+  <meta name="theme-color" content="#0f0d0c">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="uk_UA">
+  <meta property="og:title" content="Fayna Gostyna | Кейтеринг та BBQ">
+  <meta property="og:description" content="Шашлик на замовлення та виїзний BBQ на ваше свято.">
+  <!-- TODO: у assets/ не було фото. Замініть на перше фото страви (JPG 1200×630)
+       і вкажіть повну адресу після публікації, напр. https://USER.github.io/REPO/assets/og-image.jpg -->
+  <meta property="og:image" content="assets/og-image.png">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- remove before launch -->
+  <div class="demo-bar" role="note">Демо-версія сайту</div>
+  <!-- /remove before launch -->
+
+  <header class="header" id="top">
+    <div class="container header__inner">
+      <a class="logo" href="#top" aria-label="Fayna Gostyna, на початок сторінки">
+        <span class="logo__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 2c.6 3.2-1.2 5-2.7 6.6C7.8 10.2 6.5 11.7 6.5 14.3A5.5 5.5 0 0 0 12 20a5.5 5.5 0 0 0 5.5-5.7c0-2.2-1-3.9-2.2-5.2.1 1.6-.5 2.8-1.6 3.4.3-3.9-.6-7.8-1.7-10.5Z"/></svg>
+        </span>
+        Fayna Gostyna
+      </a>
+      <nav class="nav" aria-label="Основна навігація">
+        <a href="#menu">Меню</a>
+        <a href="#takeaway">Шашлик</a>
+        <a href="#calculator">Кейтеринг</a>
+        <a href="#gallery">Галерея</a>
+        <a href="#contacts">Контакти</a>
+      </nav>
+      <a class="btn btn--primary btn--sm" href="#order">Замовити</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="container hero__inner">
+        <div class="hero__text">
+          <h1 class="hero__title">Кейтеринг та BBQ для вашої події</h1>
+          <p class="hero__lead">Виїзний BBQ на свята і шашлик на замовлення. Свинина, реберця, курка та овочі з мангалу.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#takeaway">Замовити шашлик</a>
+            <a class="btn btn--ghost" href="#calculator">Розрахувати кейтеринг</a>
+          </div>
+        </div>
+        <div class="hero__media">
+          <!-- TODO: замінити плейсхолдер на головне фото (напр. assets/hero.jpg) -->
+          <div class="ph ph--hero" role="img" aria-label="фото"><span class="ph__label">фото</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section section--tight" id="services">
+      <div class="container">
+        <div class="services">
+          <article class="service">
+            <h2 class="service__title">Шашлик на замовлення</h2>
+            <p class="service__text">Замовляйте м'ясо й овочі з мангалу на кілограми. Можна забрати самому або домовитися про доставку.</p>
+            <a class="btn btn--primary" href="#takeaway">Замовити</a>
+          </article>
+          <article class="service">
+            <h2 class="service__title">Кейтеринг на подію</h2>
+            <p class="service__text">Весілля, день народження, корпоратив. Вартість залежить від кількості гостей і формату.</p>
+            <a class="btn btn--ghost" href="#calculator">Порахувати</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENU -->
+    <section class="section section--alt" id="menu">
+      <div class="container">
+        <div class="section__head">
+          <h2 class="section__title">Меню</h2>
+          <p class="section__lead">Ціни за кілограм або за штуку.</p>
+        </div>
+        <div class="filters" role="tablist" aria-label="Категорії меню" id="menu-filters"></div>
+        <div class="menu-grid" id="menu-grid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- TAKEAWAY ORDER -->
+    <section class="section" id="takeaway">
+      <div class="container">
+        <div class="section__head">
+          <h2 class="section__title">Шашлик на замовлення</h2>
+          <p class="section__lead">Оберіть, що і скільки, а далі заповніть контакти.</p>
+        </div>
+        <div class="calc">
+          <div class="calc__controls">
+            <div class="calc__block">
+              <div class="cart" id="cart-list"></div>
+            </div>
+            <a class="calc__mini" href="#cart-summary" aria-hidden="true" tabindex="-1">
+              <span>Разом</span><strong id="cart-mini-total">0 ₴</strong>
+            </a>
+          </div>
+          <aside class="calc__summary" id="cart-summary" aria-live="polite">
+            <p class="calc__summary-label">Ваше замовлення</p>
+            <p class="calc__total" id="cart-total">0 ₴</p>
+            <ul class="cart__lines" id="cart-lines"></ul>
+            <p class="calc__hint" id="cart-hint">Додайте хоча б одну позицію.</p>
+            <a class="btn btn--primary btn--block" href="#order" id="cart-to-order">Оформити замовлення</a>
+            <p class="calc__note">Ціна без доставки. Вартість доставки скажемо по телефону.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATERING CALCULATOR -->
+    <section class="section section--alt" id="calculator">
+      <div class="container">
+        <div class="section__head">
+          <h2 class="section__title">Кейтеринг на подію</h2>
+          <p class="section__lead">Вкажіть кількість гостей, формат і страви.</p>
+        </div>
+
+        <div class="calc">
+          <div class="calc__controls">
+            <fieldset class="calc__block">
+              <legend class="calc__label">Кількість гостей</legend>
+              <div class="guests">
+                <input type="range" id="guests-range" min="5" max="500" step="1" value="50" aria-label="Кількість гостей, повзунок">
+                <input type="number" id="guests-number" min="5" max="500" step="1" value="50" inputmode="numeric" aria-label="Кількість гостей, число">
+              </div>
+              <div class="guests__scale" aria-hidden="true"><span>5</span><span>500</span></div>
+            </fieldset>
+
+            <fieldset class="calc__block">
+              <legend class="calc__label">Формат події</legend>
+              <div class="formats" id="calc-formats"></div>
+            </fieldset>
+
+            <fieldset class="calc__block">
+              <legend class="calc__label">Страви <span class="muted">(ціна на одного гостя)</span></legend>
+              <div class="dishes" id="calc-dishes"></div>
+            </fieldset>
+
+            <a class="calc__mini" href="#calc-summary" aria-hidden="true" tabindex="-1">
+              <span>Орієнтовна сума</span><strong id="calc-mini-total">0 ₴</strong>
+            </a>
+          </div>
+
+          <aside class="calc__summary" id="calc-summary" aria-live="polite">
+            <p class="calc__summary-label">Орієнтовна сума</p>
+            <p class="calc__total" id="calc-total">0 ₴</p>
+            <dl class="calc__breakdown">
+              <div><dt>Вартість на гостя</dt><dd id="calc-per-person">0 ₴</dd></div>
+              <div><dt>Гостей</dt><dd id="calc-guests">50</dd></div>
+              <div><dt>Надбавка за формат</dt><dd id="calc-fee">0 ₴</dd></div>
+            </dl>
+            <p class="calc__hint" id="calc-hint" hidden>Оберіть хоча б одну страву.</p>
+            <a class="btn btn--primary btn--block" href="#order" id="calc-to-order">Замовити з цим розрахунком</a>
+            <p class="calc__note">Точну суму скажемо, коли обговоримо деталі.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="section" id="gallery">
+      <div class="container">
+        <div class="section__head">
+          <h2 class="section__title">Галерея</h2>
+        </div>
+        <div class="gallery" id="gallery-grid"></div>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <!-- ЗАГЛУШКИ: це не справжні відгуки. Замініть реальними відгуками клієнтів (з їхнього дозволу) перед запуском. -->
+    <section class="section section--alt" id="reviews">
+      <div class="container">
+        <div class="section__head">
+          <h2 class="section__title">Відгуки</h2>
+        </div>
+        <div class="reviews">
+          <article class="review">
+            <div class="review__stars" aria-label="Оцінка 5 з 5">★★★★★</div>
+            <p class="review__text">Тут буде відгук клієнта: кілька речень про подію, смак страв і роботу команди.</p>
+            <footer class="review__author"><span class="review__avatar" aria-hidden="true">?</span><span><strong>Ім'я клієнта</strong><small>Тип події, дата</small></span></footer>
+          </article>
+          <article class="review">
+            <div class="review__stars" aria-label="Оцінка 5 з 5">★★★★★</div>
+            <p class="review__text">Тут буде відгук клієнта: кілька речень про подію, смак страв і роботу команди.</p>
+            <footer class="review__author"><span class="review__avatar" aria-hidden="true">?</span><span><strong>Ім'я клієнта</strong><small>Тип події, дата</small></span></footer>
+          </article>
+          <article class="review">
+            <div class="review__stars" aria-label="Оцінка 5 з 5">★★★★★</div>
+            <p class="review__text">Тут буде відгук клієнта: кілька речень про подію, смак страв і роботу команди.</p>
+            <footer class="review__author"><span class="review__avatar" aria-hidden="true">?</span><span><strong>Ім'я клієнта</strong><small>Тип події, дата</small></span></footer>
+          </article>
+        </div>
+      </div>
+    </section>
+    <!-- /ЗАГЛУШКИ -->
+
+    <!-- ORDER FORM -->
+    <section class="section" id="order">
+      <div class="container container--narrow">
+        <div class="section__head">
+          <h2 class="section__title">Залишити заявку</h2>
+          <p class="section__lead">Ми передзвонимо й усе уточнимо.</p>
+        </div>
+
+        <div class="card form-card">
+          <form id="order-form" novalidate>
+            <div class="seg" role="radiogroup" aria-label="Тип заявки">
+              <label class="seg__opt"><input type="radio" name="type" value="takeaway" checked><span>Шашлик на замовлення</span></label>
+              <label class="seg__opt"><input type="radio" name="type" value="catering"><span>Кейтеринг на подію</span></label>
+            </div>
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="f-name">Ім'я <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-name" name="name" type="text" autocomplete="name" required maxlength="80">
+                <p class="field__error" id="f-name-error"></p>
+              </div>
+              <div class="field">
+                <label for="f-phone">Телефон <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+380 __ ___ __ __" required maxlength="20">
+                <p class="field__error" id="f-phone-error"></p>
+              </div>
+              <div class="field">
+                <label for="f-date"><span data-mode="catering">Дата події</span><span data-mode="takeaway">Дата</span> <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-date" name="date" type="date" required>
+                <p class="field__error" id="f-date-error"></p>
+              </div>
+
+              <div class="field" data-mode="takeaway">
+                <label for="f-time">Час</label>
+                <input id="f-time" name="time" type="time">
+              </div>
+              <fieldset class="field field--full delivery" data-mode="takeaway">
+                <legend>Отримання</legend>
+                <div class="delivery__opts">
+                  <label class="option"><input type="radio" name="delivery" value="pickup" checked><span class="option__title">Самовивіз</span></label>
+                  <label class="option"><input type="radio" name="delivery" value="delivery"><span class="option__title">Доставка</span></label>
+                </div>
+              </fieldset>
+              <div class="field field--full" data-mode="takeaway" id="address-field" hidden>
+                <label for="f-address">Адреса доставки <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-address" name="address" type="text" autocomplete="street-address" maxlength="160">
+                <p class="field__error" id="f-address-error"></p>
+              </div>
+
+              <div class="field" data-mode="catering">
+                <label for="f-guests">Кількість гостей <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-guests" name="guests" type="number" min="5" max="500" step="1" inputmode="numeric">
+                <p class="field__error" id="f-guests-error"></p>
+              </div>
+              <div class="field field--full" data-mode="catering">
+                <label for="f-place">Місце проведення <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-place" name="place" type="text" placeholder="Місто, заклад або адреса" maxlength="160">
+                <p class="field__error" id="f-place-error"></p>
+              </div>
+
+              <div class="field field--full">
+                <label for="f-comment">Коментар</label>
+                <textarea id="f-comment" name="comment" rows="3" maxlength="1000"></textarea>
+              </div>
+            </div>
+
+            <div class="calc-attach" data-mode="takeaway" id="cart-attach">
+              <p><strong>Замовлення:</strong> <span id="cart-attach-text"></span></p>
+              <a class="link-btn" href="#takeaway">Змінити</a>
+            </div>
+            <p class="field__error form-error" id="f-cart-error"></p>
+
+            <div class="calc-attach" data-mode="catering" id="calc-attach" hidden>
+              <p><strong>До заявки додано розрахунок:</strong> <span id="calc-attach-text"></span></p>
+              <button type="button" class="link-btn" id="calc-detach">Прибрати</button>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--block">Надіслати заявку</button>
+            <p class="form-note"><span class="req">*</span> обов'язкові поля. Заявка відкриється в Telegram, там треба натиснути «Надіслати».</p>
+          </form>
+
+          <div class="thanks" id="thanks" hidden tabindex="-1">
+            <div class="thanks__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="36" height="36"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></svg>
+            </div>
+            <h3 class="thanks__title">Дякуємо! Ми зв'яжемося з вами</h3>
+            <p class="thanks__text">Заявку отримали. Скоро передзвонимо.</p>
+            <button type="button" class="btn btn--ghost" id="thanks-reset">Надіслати ще одну заявку</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="contacts">
+    <div class="container footer__inner">
+      <div>
+        <a class="logo" href="#top">Fayna Gostyna</a>
+        <p class="muted">Кейтеринг та BBQ</p>
+      </div>
+      <!-- Телефон з профілю Instagram. TODO: додати місто та зону доставки -->
+      <ul class="footer__list">
+        <li><span class="muted">Телефон</span><a href="tel:+380633957709">+38 063 395 77 09</a></li>
+        <li><span class="muted">Месенджери</span><span>Viber, Telegram, WhatsApp</span></li>
+      </ul>
+      <div>
+        <a class="insta" href="https://www.instagram.com/fayna_gostyna_cateringbbq/" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M7 2.8h10A4.2 4.2 0 0 1 21.2 7v10a4.2 4.2 0 0 1-4.2 4.2H7A4.2 4.2 0 0 1 2.8 17V7A4.2 4.2 0 0 1 7 2.8Z"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor"/></svg>
+          @fayna_gostyna_cateringbbq
+        </a>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <p class="muted">© <span id="year"></span> Fayna Gostyna</p>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Перегляд фото" hidden>
+    <button class="lightbox__btn lightbox__close" type="button" aria-label="Закрити">×</button>
+    <button class="lightbox__btn lightbox__prev" type="button" aria-label="Попереднє фото">‹</button>
+    <figure class="lightbox__figure">
+      <div class="lightbox__media" id="lightbox-media"></div>
+      <figcaption class="lightbox__caption" id="lightbox-caption"></figcaption>
+    </figure>
+    <button class="lightbox__btn lightbox__next" type="button" aria-label="Наступне фото">›</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
